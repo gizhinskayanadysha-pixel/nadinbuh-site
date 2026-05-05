@@ -555,6 +555,106 @@
     }
     .form-success strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 12px; }
 
+    /* ── КАК РАБОТАЕМ ── */
+    .how-section {
+      background: var(--linen);
+      padding: 80px 48px;
+    }
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .how-step {
+      background: var(--dark2);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .how-step::after {
+      content: '→';
+      position: absolute;
+      right: -14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--burg);
+      font-size: 20px;
+      z-index: 1;
+    }
+    .how-step:last-child::after { display: none; }
+    .how-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; font-weight: 700;
+      color: var(--burg); opacity: 0.35;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .how-title {
+      font-size: 15px; font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .how-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.6;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: var(--espresso);
+      padding: 80px 48px;
+    }
+    .faq-section .bento-label { color: var(--sand); }
+    .faq-section .bento-title { color: var(--cream); }
+    .faq-section .bento-title em { color: var(--sand); }
+    .faq-list {
+      margin-top: 48px;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .faq-item { background: var(--dark2); }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 22px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 500;
+      color: var(--cream);
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+    }
+    .faq-q:hover { color: var(--sand); }
+    .faq-icon {
+      flex-shrink: 0;
+      font-size: 20px; font-weight: 300;
+      color: var(--burg);
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      display: none;
+      padding: 0 28px 22px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── RESPONSIVE how/faq ── */
+    @media (max-width: 960px) {
+      .how-section, .faq-section { padding: 56px 20px; }
+      .how-steps { grid-template-columns: 1fr 1fr; }
+      .how-step::after { display: none; }
+    }
+    @media (max-width: 560px) {
+      .how-steps { grid-template-columns: 1fr; }
+    }
+
     /* ── КНОПКА НАВЕРХ ── */
     .back-top {
       position: fixed; bottom: 32px; right: 32px; z-index: 300;
@@ -612,6 +712,8 @@
   <div class="nav-links">
     <a href="#about">Обо мне</a>
     <a href="#services">Услуги</a>
+    <a href="#how">Как работаем</a>
+    <a href="#faq">FAQ</a>
     <a href="#reviews">Отзывы</a>
     <a href="#request">Заявка</a>
     <a href="#contacts" class="nav-cta">Написать</a>
@@ -879,6 +981,70 @@
   </div>
 </section>
 
+<!-- КАК РАБОТАЕМ -->
+<section class="how-section" id="how">
+  <div class="bento-label">Процесс работы</div>
+  <h2 class="bento-title">Как мы работаем —<br><em>просто и прозрачно</em></h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <div class="how-title">Заявка или звонок</div>
+      <div class="how-text">Напишите в мессенджере или заполните форму на сайте. Отвечаю в течение дня, обычно быстрее.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <div class="how-title">Бесплатная консультация</div>
+      <div class="how-text">Разбираем вашу ситуацию: какой бизнес, какие задачи, что уже есть. Предлагаю оптимальное решение.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <div class="how-title">Договор и старт</div>
+      <div class="how-text">Подписываем договор, я принимаю документы. Всё онлайн — ехать никуда не нужно.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">04</div>
+      <div class="how-title">Работа под ключ</div>
+      <div class="how-text">Веду учёт, сдаю отчётность, на связи в мессенджере. Вы занимаетесь бизнесом — я беру остальное.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="bento-label">Вопрос — ответ</div>
+  <h2 class="bento-title">Часто задают —<br><em>отвечаю честно</em></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Сколько стоят услуги?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Ведение ИП без сотрудников — от 6 000 ₽/мес. Полное сопровождение ООО или ИП с сотрудниками — от 35 000 ₽/мес. Разовые услуги (декларация, документы) — по прайсу в разделе «Услуги». Точную стоимость называю после короткой консультации — цена зависит от объёма задач.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Как передавать документы?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Всё онлайн — фото или сканы через мессенджер, Telegram или WhatsApp. Никуда ехать не нужно. Если документов много — договоримся об удобном способе: облачное хранилище, email, любой вариант под вас.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Что если в отчётности будет ошибка?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Несу профессиональную ответственность по договору. Если ошибка по моей вине — исправляю за свой счёт, включая штрафы и пени. За 10 лет практики таких случаев не было, но договор защищает вас в любом случае.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Работаете только с салонами красоты?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Нет, работаю с любым малым бизнесом: ИП и ООО на УСН, ПСН, с сотрудниками и без. Просто салоны красоты — одно из направлений, где особенно много специфики по оформлению мастеров и налогам.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Вы работаете в другом городе?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Да, работаю онлайн по всей России. Клиенты есть в Москве, Санкт-Петербурге, регионах. Общаемся через Telegram, WhatsApp, Zoom — как вам удобнее.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Как быстро вы отвечаете?<span class="faq-icon">+</span></button>
+      <div class="faq-a">В рабочее время отвечаю в течение нескольких часов. Срочные вопросы — как можно быстрее. Если нахожусь на встрече или занята — предупреждаю заранее.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Можно ли начать с разовой услуги?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Конечно. Многие клиенты начинают с консультации или разовой декларации, а потом переходят на постоянное обслуживание. Никаких обязательств нет — работаем как вам удобно.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ФОРМА ЗАЯВКИ -->
 <section class="form-section" id="request">
   <div class="form-inner">
@@ -976,7 +1142,7 @@
 <!-- FOOTER -->
 <footer>
   <a class="foot-logo" href="#">Надежда Гижинская · Бухгалтер</a>
-  <div class="foot-copy">© 2026 · ИП Гижинская Надежда Николаевна</div>
+  <div class="foot-copy">© 2026 · ИП Гижинская Надежда Николаевна · ИНН 101801475748 · ОГРНИП 326784700007015</div>
   <div class="foot-links">
     <a href="https://t.me/Nadinbuh">Канал</a>
     <a href="https://t.me/FeedbackNadinBuh">Отзывы</a>
@@ -989,6 +1155,16 @@
 <button class="back-top" id="backTop" aria-label="Наверх">↑</button>
 
 <script>
+  // FAQ аккордеон
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
   // URL бота на Render (заполнить после деплоя: https://ИМЯ.onrender.com)
   const BOT_API = 'https://nadinbuh-bot.onrender.com';
 
