@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Надежда Гижинская — Бухгалтер для салона красоты</title>
+  <meta name="description" content="Бухгалтерия для салонов красоты, ИП и ООО. Ведение учёта, налоги, кадры — чётко, понятно, по делу. Санкт-Петербург и онлайн.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --burgundy:      #7D1713;
+      --burgundy-dark: #5C0F0B;
+      --burgundy-soft: #9B2420;
+      --beige:         #F5EDE0;
+      --beige-dark:    #EAD9C4;
+      --beige-light:   #FAF6F0;
+      --text-dark:     #3C110F;
+      --text-gray:     #6B5B58;
+      --white:         #FFFFFF;
+      --card-shadow:   0 4px 24px rgba(93,15,11,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--beige-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ── ШАПКА ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,246,240,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--beige-dark);
+      padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--burgundy);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 14px; font-weight: 500;
+      margin-left: 32px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--burgundy); }
+    .header-cta {
+      background: var(--burgundy);
+      color: var(--white) !important;
+      padding: 8px 20px;
+      border-radius: 4px;
+      margin-left: 32px !important;
+    }
+    .header-cta:hover { background: var(--burgundy-dark) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+    }
+    .hero-left {
+      background: var(--burgundy);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      color: var(--beige);
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 2px;
+      margin-bottom: 28px; width: fit-content;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--beige-dark);
+    }
+    .hero-sub {
+      font-size: 16px; font-weight: 300;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.7; margin-bottom: 40px;
+      max-width: 420px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white);
+      color: var(--burgundy);
+      font-size: 15px; font-weight: 600;
+      padding: 16px 32px; border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.25s;
+      width: fit-content;
+    }
+    .btn-primary:hover { background: var(--beige); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      font-size: 15px; font-weight: 500;
+      padding: 16px 32px; border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.25s;
+      width: fit-content;
+      margin-left: 16px;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 32px;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+    .stat-label {
+      font-size: 12px; font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .hero-badge {
+      position: absolute; bottom: 40px; left: -20px;
+      background: var(--white);
+      padding: 16px 20px;
+      border-radius: 4px;
+      box-shadow: var(--card-shadow);
+      max-width: 220px;
+    }
+    .hero-badge-icon { font-size: 22px; margin-bottom: 4px; display: block; }
+    .hero-badge-text {
+      font-size: 13px; font-weight: 600;
+      color: var(--text-dark); line-height: 1.4;
+    }
+    .hero-badge-sub { font-size: 11px; color: var(--text-gray); margin-top: 2px; }
+
+    /* ── СЕКЦИЯ: УЗНАЁТЕ СЕБЯ ── */
+    .section { padding: 96px 40px; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--burgundy);
+      margin-bottom: 16px; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700; line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 16px; color: var(--text-gray);
+      max-width: 560px; line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--beige-dark);
+    }
+    .pain-card {
+      background: var(--white);
+      padding: 36px 32px;
+      position: relative;
+    }
+    .pain-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--burgundy);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .pain-card:hover::before { opacity: 1; }
+    .pain-icon {
+      font-size: 28px; margin-bottom: 16px; display: block;
+    }
+    .pain-title {
+      font-size: 16px; font-weight: 600;
+      color: var(--text-dark); margin-bottom: 8px;
+    }
+    .pain-text { font-size: 14px; color: var(--text-gray); line-height: 1.6; }
+
+    /* ── О НАДЕЖДЕ ── */
+    .about-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img {
+      width: 100%; border-radius: 0;
+      display: block;
+    }
+    .about-img-accent {
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 120px; height: 120px;
+      background: var(--burgundy);
+      z-index: -1;
+    }
+    .about-img-accent2 {
+      position: absolute;
+      bottom: -20px; left: -20px;
+      width: 80px; height: 80px;
+      background: var(--beige-dark);
+      z-index: -1;
+    }
+    .about-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-style: italic;
+      color: var(--burgundy);
+      border-left: 3px solid var(--burgundy);
+      padding-left: 20px;
+      margin: 28px 0;
+      line-height: 1.5;
+    }
+    .about-text { font-size: 15px; color: var(--text-gray); line-height: 1.8; margin-bottom: 16px; }
+    .about-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .chip {
+      background: var(--beige);
+      border: 1px solid var(--beige-dark);
+      color: var(--text-dark);
+      font-size: 13px; font-weight: 500;
+      padding: 6px 14px; border-radius: 2px;
+    }
+
+    /* ── УСЛУГИ ── */
+    .services-bg { background: var(--burgundy); padding: 96px 40px; }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .services-bg .section-label { color: var(--beige-dark); }
+    .services-bg .section-title { color: var(--white); }
+    .services-bg .section-sub { color: rgba(255,255,255,0.7); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.08);
+      padding: 36px 28px;
+      transition: background 0.2s;
+      position: relative;
+      border-top: 2px solid transparent;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.14); border-top-color: var(--beige-dark); }
+    .service-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--beige-dark);
+      margin-bottom: 4px;
+    }
+    .service-period { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+    .service-name {
+      font-size: 15px; font-weight: 600;
+      color: var(--white); margin-bottom: 12px;
+    }
+    .service-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+    .service-tag {
+      display: inline-block; margin-top: 16px;
+      background: rgba(255,255,255,0.12);
+      color: var(--beige);
+      font-size: 11px; padding: 4px 10px; border-radius: 2px;
+    }
+
+    .services-row2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px; margin-top: 2px;
+    }
+
+    /* ── ПОЧЕМУ Я ── */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2px; background: var(--beige-dark);
+    }
+    .why-card {
+      background: var(--beige-light);
+      padding: 44px 40px;
+      display: flex; gap: 24px;
+    }
+    .why-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px; font-weight: 700;
+      color: var(--beige-dark); line-height: 1;
+      flex-shrink: 0; width: 56px;
+    }
+    .why-title { font-size: 17px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .why-text { font-size: 14px; color: var(--text-gray); line-height: 1.7; }
+
+    /* ── PAPERS SECTION ── */
+    .papers-section {
+      position: relative; overflow: hidden;
+      min-height: 480px;
+      display: flex; align-items: center;
+    }
+    .papers-section img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .papers-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(92,15,11,0.90) 40%, rgba(92,15,11,0.40) 100%);
+    }
+    .papers-content {
+      position: relative; z-index: 2;
+      max-width: 600px; padding: 80px 80px;
+    }
+    .papers-content .section-label { color: var(--beige-dark); }
+    .papers-content .section-title { color: var(--white); margin-bottom: 20px; }
+    .papers-content p { font-size: 16px; color: rgba(255,255,255,0.80); line-height: 1.8; margin-bottom: 32px; }
+
+    /* ── ОТЗЫВЫ ── */
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--beige-dark);
+    }
+    .review-card {
+      background: var(--white);
+      padding: 36px 32px;
+    }
+    .review-stars { color: var(--burgundy); font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+    .review-text {
+      font-size: 14px; color: var(--text-gray);
+      line-height: 1.8; margin-bottom: 20px;
+      font-style: italic;
+    }
+    .review-text::before { content: '«'; }
+    .review-text::after  { content: '»'; }
+    .review-author { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+    .review-role { font-size: 12px; color: var(--text-gray); margin-top: 2px; }
+    .review-line {
+      width: 32px; height: 2px;
+      background: var(--burgundy);
+      margin-bottom: 16px;
+    }
+
+    /* ── КОНТАКТЫ ── */
+    .contacts-section { padding: 96px 40px; background: var(--text-dark); }
+    .contacts-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .contacts-section .section-label { color: var(--beige-dark); }
+    .contacts-section .section-title { color: var(--white); }
+    .contacts-section .section-sub { color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-item:hover { background: rgba(255,255,255,0.10); }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--burgundy);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 4px;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .contact-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+    .contact-value { font-size: 15px; font-weight: 500; color: var(--white); }
+
+    .bot-promo {
+      background: var(--burgundy);
+      padding: 36px; border-radius: 4px;
+    }
+    .bot-promo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--white); margin-bottom: 12px;
+    }
+    .bot-promo-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 24px; }
+    .btn-bot {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); color: var(--burgundy);
+      font-size: 14px; font-weight: 600;
+      padding: 14px 28px; border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-bot:hover { background: var(--beige); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A0807;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; color: var(--beige-dark);
+      text-decoration: none;
+    }
+    .footer-text { font-size: 12px; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-links a:hover { color: var(--beige-dark); }
+
+    /* ── АДАПТИВ ── */
+    @media (max-width: 900px) {
+      header { padding: 14px 20px; }
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 60px 24px; min-height: 100vh; }
+      .hero-right { height: 50vw; }
+      .section { padding: 64px 20px; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .services-bg { padding: 64px 20px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .services-row2 { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .papers-content { padding: 60px 24px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contacts-section { padding: 64px 20px; }
+      .contacts-inner { grid-template-columns: 1fr; gap: 40px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">Надежда Гижинская</a>
+  <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#services">Услуги</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contacts" class="header-cta">Написать</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Бухгалтер для индустрии красоты</span>
+    <h1>Вы создаёте красоту — <em>я беру цифры на себя</em></h1>
+    <p class="hero-sub">
+      Бухгалтерия для салонов красоты, ИП и ООО. Налоги, отчётность, кадры —
+      без штрафов, без нервов, без лишних трат. Работаю онлайн по всей России.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://t.me/Nadezhda_Gizh" class="btn-primary">✉️ Написать в Telegram</a>
+      <a href="#services" class="btn-outline">Узнать цены</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">лет опыта</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">клиентов</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">онлайн</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="img/hero.jpg" alt="Надежда Гижинская — бухгалтер">
+    <div class="hero-badge">
+      <span class="hero-badge-icon">🛡️</span>
+      <div class="hero-badge-text">Работаю официально</div>
+      <div class="hero-badge-sub">Договор и закрывающие документы</div>
+    </div>
+  </div>
+</section>
+
+<!-- УЗНАЁТЕ СЕБЯ? -->
+<section style="background: var(--beige); padding: 0;">
+  <div class="section">
+    <span class="section-label">Боли клиентов</span>
+    <h2 class="section-title">Узнаёте себя?</h2>
+    <p class="section-sub">Владельцы салонов чаще всего сталкиваются с одними и теми же проблемами. Я знаю, как их решить.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">📋</span>
+        <div class="pain-title">«Не знаю, что и когда сдавать»</div>
+        <div class="pain-text">Дедлайны по декларациям, взносам и отчётам постоянно путаются. Страх получить штраф за просрочку.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">👩‍💼</span>
+        <div class="pain-title">«Мастера — сотрудники или самозанятые?»</div>
+        <div class="pain-text">Непонятно, как правильно оформить мастеров, чтобы не нарваться на доначисления от налоговой.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">💸</span>
+        <div class="pain-title">«Плачу налоги и не понимаю за что»</div>
+        <div class="pain-text">Суммы берутся непонятно откуда. Хочется понять, где можно законно сэкономить.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🏦</span>
+        <div class="pain-title">«Банк запросил кучу документов»</div>
+        <div class="pain-text">Блокировки по 115-ФЗ, запросы на подтверждение оборотов — не знаешь что отвечать.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🕐</span>
+        <div class="pain-title">«Нет времени на бухгалтерию»</div>
+        <div class="pain-text">Весь день в салоне, а вечером ещё разбираться с документами и 1С — сил уже нет.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">📊</span>
+        <div class="pain-title">«Не знаю, сколько зарабатываю реально»</div>
+        <div class="pain-text">Деньги есть, но куда уходят — непонятно. Не можешь планировать и масштабироваться.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- О НАДЕЖДЕ -->
+<section id="about" style="background: var(--white);">
+  <div class="section">
+    <div class="about-wrap">
+      <div class="about-img-wrap">
+        <div class="about-img-accent"></div>
+        <div class="about-img-accent2"></div>
+        <img src="img/about.jpg" alt="Надежда Гижинская">
+      </div>
+      <div>
+        <span class="section-label">Обо мне</span>
+        <h2 class="section-title">Надежда Гижинская</h2>
+        <blockquote class="about-quote">
+          «Я не просто веду цифры — я помогаю бизнесу расти без страха перед налоговой»
+        </blockquote>
+        <p class="about-text">
+          Практикующий бухгалтер с опытом работы с малым бизнесом, ИП и ООО.
+          Специализируюсь на индустрии красоты — знаю все нюансы: от оформления мастеров
+          до кассовой дисциплины и работы с патентной системой.
+        </p>
+        <p class="about-text">
+          Работаю онлайн — вам не нужно никуда ехать.
+          Все документы, отчёты и ответы на вопросы — в мессенджере, быстро и по делу.
+        </p>
+        <div class="about-chips">
+          <span class="chip">УСН «Доходы» и «Д-Р»</span>
+          <span class="chip">Патентная система</span>
+          <span class="chip">Кадровое делопроизводство</span>
+          <span class="chip">Оформление мастеров</span>
+          <span class="chip">Восстановление учёта</span>
+          <span class="chip">Работа онлайн</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- УСЛУГИ -->
+<section id="services" class="services-bg">
+  <div class="services-inner">
+    <span class="section-label">Услуги и цены</span>
+    <h2 class="section-title" style="color: var(--white);">Прозрачные цены — никаких сюрпризов</h2>
+    <p class="section-sub">Выберите формат под свой бизнес. Если не знаете что нужно — начните с консультации.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-price">6 000 ₽</div>
+        <div class="service-period">в месяц</div>
+        <div class="service-name">ИП без сотрудников</div>
+        <div class="service-desc">Ведение учёта, подготовка и сдача отчётности, расчёт налогов и взносов.</div>
+        <span class="service-tag">УСН / ПСН</span>
+      </div>
+      <div class="service-card">
+        <div class="service-price">35 000 ₽</div>
+        <div class="service-period">в месяц · до 10 сотрудников</div>
+        <div class="service-name">Ведение под ключ</div>
+        <div class="service-desc">Полное бухгалтерское и кадровое сопровождение ИП или ООО с сотрудниками.</div>
+        <span class="service-tag">Всё включено</span>
+      </div>
+      <div class="service-card">
+        <div class="service-price">5 000 ₽</div>
+        <div class="service-period">за декларацию</div>
+        <div class="service-name">Декларация УСН</div>
+        <div class="service-desc">Подготовка и подача годовой декларации по УСН. Быстро и без ошибок.</div>
+        <span class="service-tag">Разовая услуга</span>
+      </div>
+      <div class="service-card">
+        <div class="service-price">10 000 ₽</div>
+        <div class="service-period">в час</div>
+        <div class="service-name">Консультация</div>
+        <div class="service-desc">Разбираем ваш конкретный вопрос: налоговый режим, оформление мастеров, оптимизация.</div>
+        <span class="service-tag">Онлайн</span>
+      </div>
+    </div>
+
+    <div class="services-row2">
+      <div class="service-card">
+        <div class="service-price">500 ₽</div>
+        <div class="service-period">за документ · до 10 позиций</div>
+        <div class="service-name">Документы: ПП, УПД, Счёт, Акт</div>
+        <div class="service-desc">Подготовка платёжных поручений, счетов, актов, УПД. Грамотно, быстро, по вашим данным.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-price">5 000 ₽</div>
+        <div class="service-period">за отчёт</div>
+        <div class="service-name">Документы для Статистики</div>
+        <div class="service-desc">Подготовка обязательной отчётности в органы Росстата. Без лишней головной боли для вас.</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; padding: 28px 32px; background: rgba(255,255,255,0.08); display: flex; gap: 40px; flex-wrap: wrap;">
+      <div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px;">Восстановление учёта</div>
+        <div style="font-size: 15px; font-weight: 600; color: var(--white);">По договорённости — зависит от объёма и периода</div>
+      </div>
+      <div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px;">Кадровое делопроизводство</div>
+        <div style="font-size: 15px; font-weight: 600; color: var(--white);">По договорённости — обсудим детали на консультации</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПОЧЕМУ Я -->
+<section style="background: var(--beige-light); padding: 0;">
+  <div class="section">
+    <span class="section-label">Почему выбирают меня</span>
+    <h2 class="section-title">Работаю так, как удобно вам</h2>
+    <p class="section-sub">Никакой бухгалтерской воды — только понятная работа и результат.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div>
+        <div class="why-title">Онлайн — без поездок и офисов</div>
+        <div class="why-text">Всё в мессенджере или на удобной вам платформе. Отправляете документы — я делаю всё остальное.</div>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div>
+        <div class="why-title">Знаю специфику индустрии красоты</div>
+        <div class="why-text">Мастера-самозанятые, ПСН, кассовая дисциплина, сезонность — я в этом разбираюсь и знаю все нюансы.</div>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div>
+        <div class="why-title">Слежу за изменениями в законе</div>
+        <div class="why-text">Первой узнаю о новых требованиях и сообщаю вам. Вы всегда работаете в правовом поле — без сюрпризов от налоговой.</div>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <div>
+        <div class="why-title">Прозрачность и честность</div>
+        <div class="why-text">Фиксированные цены, договор, закрывающие документы. Никаких скрытых платежей и размытых условий.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAPERS SECTION -->
+<section class="papers-section">
+  <img src="img/papers.jpg" alt="">
+  <div class="papers-overlay"></div>
+  <div class="papers-content">
+    <span class="section-label">Моя философия</span>
+    <h2 class="section-title">Бухгалтерия — это не страшно</h2>
+    <p>Я взяла всю бумажную рутину на себя, чтобы вы могли сфокусироваться на главном — своём бизнесе и клиентах. Налоги, отчёты, документы — моя работа. Ваш рост — наш общий результат.</p>
+    <a href="https://t.me/Nadezhda_Gizh" class="btn-primary">Поговорить о вашем бизнесе →</a>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section id="reviews" style="background: var(--white);">
+  <div class="section">
+    <span class="section-label">Отзывы клиентов</span>
+    <h2 class="section-title">Что говорят те, кто уже работает со мной</h2>
+    <p class="section-sub">Отзывы реальных клиентов. Больше — в нашем канале отзывов.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-line"></div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Надежда — просто свет в окошке в налоговом сумраке. Все чётко, по полочкам, человеческим и понятным языком! «Смотри сюда, делай вот так и будет тебе счастье!» — коротко, структурно и главное — максимально оперативно!</div>
+      <div class="review-author">Ольга Старостина</div>
+      <div class="review-role">Постоянный клиент</div>
+    </div>
+    <div class="review-card">
+      <div class="review-line"></div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">«Надежда дала Надежду», что можно выжить в этом налоговом водовороте и не пойти ко дну! Все по полочкам разложили и построили план, как не обанкротиться в новой системе налогообложения. А главное — не нарушать закон!</div>
+      <div class="review-author">Евгения Валерьевна</div>
+      <div class="review-role">Владелец студии эпиляций</div>
+    </div>
+    <div class="review-card">
+      <div class="review-line"></div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Работаю с Надеждой более 5 лет. Ведём кадровое дело и бухгалтерию по 2 организациям. Её внимательность, знания и поддержка — это надёжное плечо. Благодарю за столь плодотворное сотрудничество.</div>
+      <div class="review-author">Марина Ирлина</div>
+      <div class="review-role">ИП, 2 организации, 5+ лет</div>
+    </div>
+  </div>
+  <div style="text-align: center; padding: 40px 0;">
+    <a href="https://t.me/FeedbackNadinBuh" style="display: inline-flex; align-items: center; gap: 8px; color: var(--burgundy); font-size: 14px; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--burgundy); padding-bottom: 2px;">
+      Читать все отзывы в Telegram →
+    </a>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section id="contacts" class="contacts-section">
+  <div class="contacts-inner">
+    <div>
+      <span class="section-label">Контакты</span>
+      <h2 class="section-title">Давайте обсудим ваш бизнес</h2>
+      <p class="section-sub">Напишите удобным способом — отвечаю в течение дня.</p>
+      <div class="contact-items">
+        <a href="https://t.me/Nadezhda_Gizh" class="contact-item">
+          <div class="contact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.64-.203-.653-.64.136-.954l11.57-4.461c.537-.194 1.006.131.828.943z"/></svg></div>
+          <div>
+            <div class="contact-label">Telegram</div>
+            <div class="contact-value">@Nadezhda_Gizh</div>
+          </div>
+        </a>
+        <a href="https://wa.me/79215935116" class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value">+7 (921) 593-51-16</div>
+          </div>
+        </a>
+        <a href="tel:+79215935116" class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Телефон</div>
+            <div class="contact-value">+7 (921) 593-51-16</div>
+          </div>
+        </a>
+        <a href="mailto:gizhinskayanadysha@gmail.com" class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">gizhinskayanadysha@gmail.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="bot-promo">
+      <div class="bot-promo-title">🤖 Бесплатные материалы в боте</div>
+      <div class="bot-promo-text">
+        Гайды по УСН, шаблоны документов, информация по налогам для ИП и ООО —
+        всё бесплатно в Telegram-боте. Присоединяйтесь!
+      </div>
+      <a href="https://t.me/NadinBuhAssistBot" class="btn-bot">
+        🚀 Открыть бот
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">Надежда Гижинская · Бухгалтер</a>
+  <div class="footer-text">© 2026 · ИП Гижинская Надежда Николаевна</div>
+  <div class="footer-links">
+    <a href="https://t.me/Nadinbuh">Канал</a>
+    <a href="https://t.me/FeedbackNadinBuh">Отзывы</a>
+    <a href="https://t.me/NadinBuhAssistBot">Бот</a>
+  </div>
+</footer>
+
+</body>
+</html>

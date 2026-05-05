@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Надежда Гижинская — Бухгалтер для салона красоты</title>
+  <meta name="description" content="Бухгалтерия для салонов красоты, ИП и ООО — чётко, понятно, по делу. 10 лет опыта. Онлайн по всей России.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --burg:      #7D1713;
+      --burg-d:    #4A0C09;
+      --burg-l:    #A83228;
+      --cream:     #F5EDE0;
+      --cream-d:   #E8D5BC;
+      --sand:      #C9A882;
+      --dark:      #1E1412;
+      --dark2:     #2C1D1A;
+      --dark3:     #3C2622;
+      --text-m:    #9A8580;
+      --white:     #FFFFFF;
+
+      /* Светлые секции — грязный льняной */
+      --linen:     #E8E0D0;
+      --linen-d:   #DDD3C0;
+      --linen-dd:  #CEBFAA;
+      --espresso:  #28180C;
+      --warm-m:    #68503C;
+      --warm-l:    #9A8068;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--linen); color: var(--espresso); line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(232,224,208,0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(40,24,12,0.10);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--espresso); text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: var(--warm-m); text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--espresso); }
+    .nav-links .nav-cta {
+      font-size: 13px; font-weight: 500;
+      background: var(--burg); color: var(--white);
+      padding: 10px 24px; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-links .nav-cta:hover { background: var(--burg-l); color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      padding-top: 72px;
+    }
+    .hero-l {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-l img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      filter: brightness(0.55) saturate(0.9);
+    }
+    .hero-l-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(74,12,9,0.65) 0%, rgba(30,20,18,0.30) 60%, transparent 100%);
+    }
+    .hero-l-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 56px 52px;
+    }
+    .hero-tag-line {
+      font-size: 11px; font-weight: 500; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--sand);
+      margin-bottom: 20px;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 6vw, 80px);
+      font-weight: 600; line-height: 1.0;
+      color: var(--white);
+    }
+    .hero-name em { font-style: italic; color: var(--cream-d); }
+    .hero-scroll {
+      margin-top: 40px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 1px;
+    }
+    .hero-scroll-line { width: 48px; height: 1px; background: rgba(255,255,255,0.25); }
+
+    .hero-r {
+      background: var(--dark2);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 56px;
+      border-left: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 400; line-height: 1.25;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+    .hero-h1 strong { font-weight: 700; color: var(--white); }
+    .hero-desc {
+      font-size: 15px; font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8; margin-bottom: 44px;
+      max-width: 380px;
+    }
+    .hero-btns { display: flex; flex-direction: column; gap: 12px; max-width: 280px; }
+    .btn-main {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--burg);
+      color: var(--white);
+      font-size: 14px; font-weight: 500;
+      padding: 16px 32px; text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-main:hover { background: var(--burg-l); transform: translateX(4px); }
+    .btn-sec {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 14px; font-weight: 400;
+      padding: 16px 32px; text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-sec:hover { border-color: var(--cream-d); color: var(--cream); }
+    .hero-meta {
+      display: flex; gap: 32px; margin-top: 56px;
+      padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-meta-item { }
+    .hero-meta-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 700;
+      color: var(--cream); line-height: 1;
+    }
+    .hero-meta-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 1px; margin-top: 4px; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden; white-space: nowrap;
+      background: var(--burg);
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .marquee-track {
+      display: inline-flex; gap: 0;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      font-size: 12px; font-weight: 500; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(255,255,255,0.85);
+      padding: 0 40px;
+    }
+    .marquee-dot {
+      color: rgba(255,255,255,0.4); padding: 0 4px;
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── BENTO GRID ── */
+    .bento-section { padding: 80px 48px; max-width: 1320px; margin: 0 auto; }
+    .bento-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--sand); margin-bottom: 14px; }
+    .bento-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px); font-weight: 600;
+      color: var(--white); margin-bottom: 60px; line-height: 1.15;
+    }
+    .bento-title em { font-style: italic; color: var(--cream-d); }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 12px;
+    }
+
+    .bento-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 36px 32px;
+      transition: border-color 0.3s;
+    }
+    .bento-card:hover { border-color: rgba(125,23,19,0.5); }
+    .bc-icon { font-size: 28px; margin-bottom: 20px; display: block; }
+    .bc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px; font-weight: 700;
+      color: var(--burg); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .bc-title { font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+    .bc-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+    .bc-1 { grid-column: span 4; }
+    .bc-2 { grid-column: span 4; }
+    .bc-3 { grid-column: span 4; }
+    .bc-4 { grid-column: span 3; }
+    .bc-5 { grid-column: span 3; }
+    .bc-6 { grid-column: span 6; background: var(--burg); border-color: transparent; }
+    .bc-6 .bc-title { color: var(--white); font-size: 18px; }
+    .bc-6 .bc-text { color: rgba(255,255,255,0.7); }
+    .bc-photo { grid-column: span 4; padding: 0; overflow: hidden; min-height: 300px; position: relative; }
+    .bc-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.7); transition: filter 0.4s, transform 0.4s; }
+    .bc-photo:hover img { filter: saturate(1); transform: scale(1.03); }
+
+    /* ── SERVICES ── */
+    .services-section { padding: 0 48px 80px; max-width: 1320px; margin: 0 auto; }
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .svc-card {
+      background: var(--dark);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+    .svc-card:hover { background: var(--dark2); }
+    .svc-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--burg);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px; font-weight: 700;
+      color: var(--cream); line-height: 1; margin-bottom: 6px;
+    }
+    .svc-period { font-size: 12px; color: var(--text-m); margin-bottom: 24px; }
+    .svc-name { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 12px; }
+    .svc-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+    .svc-badge {
+      display: inline-block; margin-top: 20px;
+      border: 1px solid rgba(125,23,19,0.4);
+      color: var(--sand); font-size: 11px; font-weight: 500;
+      padding: 4px 12px; letter-spacing: 1px;
+    }
+    .svc-dot {
+      position: absolute; top: 36px; right: 36px;
+      width: 8px; height: 8px;
+      background: var(--burg); border-radius: 50%;
+    }
+    .svc-flex { grid-column: span 3; background: var(--dark3); padding: 32px 36px; display: flex; gap: 48px; flex-wrap: wrap; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+    .svc-flex-item { }
+    .svc-flex-label { font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .svc-flex-val { font-size: 15px; font-weight: 500; color: var(--cream); }
+
+    /* ── ABOUT ── */
+    .about-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 640px;
+    }
+    .about-img { position: relative; overflow: hidden; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(0.75) brightness(0.85); }
+    .about-img-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--dark) 100%); }
+    .about-content {
+      background: var(--dark); padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-style: italic;
+      color: var(--cream-d); line-height: 1.5;
+      border-left: 2px solid var(--burg);
+      padding-left: 24px; margin: 28px 0 32px;
+    }
+    .about-text { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.9; margin-bottom: 12px; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+    .about-tag {
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.55);
+      font-size: 12px; padding: 6px 14px;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section { padding: 80px 48px; max-width: 1320px; margin: 0 auto; }
+    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+    .rev-card {
+      background: var(--dark2); border: 1px solid rgba(255,255,255,0.06);
+      padding: 36px 30px;
+      position: relative;
+    }
+    .rev-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px; color: var(--burg); opacity: 0.4;
+      line-height: 0.8; margin-bottom: 16px; display: block;
+    }
+    .rev-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 24px; font-style: italic; }
+    .rev-sep { width: 24px; height: 1px; background: var(--burg); margin-bottom: 16px; }
+    .rev-name { font-size: 13px; font-weight: 600; color: var(--cream); }
+    .rev-role { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 3px; }
+    .rev-more {
+      margin-top: 40px; text-align: center;
+    }
+    .rev-more a {
+      font-size: 13px; font-weight: 500; color: var(--sand);
+      text-decoration: none; letter-spacing: 1px;
+      border-bottom: 1px solid rgba(201,168,130,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .rev-more a:hover { color: var(--cream); border-color: var(--cream-d); }
+
+    /* ── CONTACTS ── */
+    .contacts-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--dark2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .contacts-l { padding: 80px 64px; }
+    .contacts-r {
+      background: var(--burg);
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .contacts-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 600;
+      color: var(--white); margin-bottom: 12px; line-height: 1.1;
+    }
+    .contacts-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 48px; }
+    .contact-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+      text-decoration: none; transition: padding-left 0.2s;
+    }
+    .contact-row:hover { padding-left: 8px; }
+    .contact-row:last-child { border-bottom: none; }
+    .cr-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .cr-label { font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; }
+    .cr-val { font-size: 15px; font-weight: 500; color: var(--white); }
+
+    .bot-block { }
+    .bot-block-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .bot-block-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px; font-weight: 600; color: var(--white);
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .bot-block-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 32px; }
+    .btn-bot {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--burg);
+      font-size: 14px; font-weight: 600;
+      padding: 16px 32px; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-bot:hover { background: var(--cream); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .foot-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; color: rgba(255,255,255,0.4);
+      text-decoration: none;
+    }
+    .foot-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+    .foot-links { display: flex; gap: 24px; }
+    .foot-links a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+    .foot-links a:hover { color: var(--sand); }
+
+    /* ── СВЕТЛЫЙ ФОН, ТЁМНЫЕ БЛОКИ ───────────────────────────────────────── */
+
+    /* Секции — светлый льняной фон, заголовки тёмные */
+    .bento-section,
+    .services-section,
+    .reviews-section { background: var(--linen); }
+
+    .bento-label { color: var(--burg); }
+    .bento-title { color: var(--espresso); }
+    .bento-title em { color: var(--burg); }
+
+    /* Bento карточки — тёмные, текст белый */
+    .bento-card {
+      background: var(--dark2);
+      border-color: rgba(255,255,255,0.07);
+    }
+    .bento-card:hover { border-color: rgba(125,23,19,0.55); }
+    .bc-num   { color: var(--burg); }
+    .bc-title { color: var(--white); }
+    .bc-text  { color: rgba(255,255,255,0.5); }
+
+    /* CTA-карточка — бургундская */
+    .bc-6 { background: var(--burg) !important; border-color: transparent !important; }
+    .bc-6 .bc-title { color: #fff !important; font-family: 'Cormorant Garamond', serif; font-size: 24px !important; font-weight: 600 !important; }
+    .bc-6 .bc-text  { color: rgba(255,255,255,0.78) !important; }
+
+    /* Services — тёмные карточки */
+    .svc-grid { background: rgba(40,24,12,0.12); }
+    .svc-card { background: var(--dark2); }
+    .svc-card:hover { background: var(--dark3); }
+    .svc-price  { color: var(--cream); }
+    .svc-period { color: var(--text-m); }
+    .svc-name   { color: var(--white); }
+    .svc-desc   { color: rgba(255,255,255,0.42); }
+    .svc-flex   { background: var(--dark); border-top-color: rgba(255,255,255,0.06); }
+    .svc-flex-label { color: rgba(255,255,255,0.3); }
+    .svc-flex-val   { color: var(--cream); }
+
+    /* About — тёмная текстовая сторона */
+    .about-content { background: var(--dark2); }
+    .about-img-overlay {
+      background: linear-gradient(90deg, transparent 55%, var(--dark2) 100%);
+    }
+
+    /* Reviews — тёмные карточки */
+    .rev-card {
+      background: var(--dark2);
+      border-color: rgba(255,255,255,0.06);
+    }
+    .rev-mark { color: var(--burg); opacity: 0.45; }
+    .rev-text { color: rgba(255,255,255,0.6); }
+    .rev-sep  { background: var(--burg); }
+    .rev-name { color: var(--cream); }
+    .rev-role { color: rgba(255,255,255,0.3); }
+    .rev-more a { color: var(--burg); border-color: rgba(125,23,19,0.35); }
+    .rev-more a:hover { color: var(--burg-l); border-color: var(--burg); }
+
+    /* ── SVG ICONS ── */
+    .tg-icon { fill: white; }
+
+    /* ── BADGE «РАБОТАЮ ОФИЦИАЛЬНО» ── */
+    .hero-badge {
+      position: absolute; bottom: 48px; right: 0;
+      background: var(--linen);
+      padding: 18px 24px;
+      border-left: 3px solid var(--burg);
+      box-shadow: -6px 6px 24px rgba(40,24,12,0.18);
+    }
+    .hero-badge-ico { font-size: 20px; margin-bottom: 6px; display: block; }
+    .hero-badge-text { font-size: 13px; font-weight: 700; color: var(--espresso); }
+    .hero-badge-sub  { font-size: 11px; color: var(--warm-m); margin-top: 3px; }
+
+    /* ── ФОРМА ЗАЯВКИ ── */
+    .form-section {
+      background: var(--dark);
+      padding: 80px 48px;
+    }
+    .form-inner { max-width: 720px; margin: 0 auto; }
+    .form-section .bento-label { color: var(--sand); }
+    .form-section .bento-title { color: var(--cream); }
+    .form-section .bento-title em { color: var(--sand); }
+    .form-sub { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 40px; margin-top: -32px; }
+
+    .lead-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 8px; }
+    .form-field label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; }
+    .form-field .optional { font-weight: 400; color: rgba(255,255,255,0.25); }
+    .form-field input,
+    .form-field textarea {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--burg); }
+    .form-btn {
+      align-self: flex-start;
+      background: var(--burg); color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600;
+      padding: 16px 40px; border: none;
+      cursor: pointer; transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .form-btn:hover { background: var(--burg-l); transform: translateX(4px); }
+    .form-agree { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 4px; }
+    .form-success {
+      text-align: center; padding: 48px 0;
+      font-size: 16px; color: var(--cream);
+    }
+    .form-success strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 12px; }
+
+    /* ── КНОПКА НАВЕРХ ── */
+    .back-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 300;
+      width: 46px; height: 46px;
+      background: var(--burg); color: var(--white);
+      border: none; font-size: 20px; cursor: pointer;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .back-top.visible { opacity: 1; transform: translateY(0); }
+    .back-top:hover { background: var(--burg-l); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-l { min-height: 60vw; }
+      .hero-r { padding: 48px 24px; }
+      .bento-section, .services-section, .reviews-section { padding: 56px 20px; }
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+      .bc-1, .bc-2, .bc-3, .bc-4, .bc-5, .bc-6, .bc-photo { grid-column: span 2; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .svc-flex { flex-direction: column; gap: 20px; }
+      .about-section { grid-template-columns: 1fr; }
+      .about-img { min-height: 50vw; }
+      .about-content { padding: 48px 24px; }
+      .rev-grid { grid-template-columns: 1fr; }
+      .contacts-section { grid-template-columns: 1fr; }
+      .contacts-l, .contacts-r { padding: 56px 24px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+      .form-section { padding: 56px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .back-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 16px; }
+      .hero-badge { bottom: 24px; right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Надежда Гижинская</a>
+  <div class="nav-links">
+    <a href="#about">Обо мне</a>
+    <a href="#services">Услуги</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#request">Заявка</a>
+    <a href="#contacts" class="nav-cta">Написать</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-l">
+    <img src="img/window.jpg" alt="Надежда Гижинская">
+    <div class="hero-l-overlay"></div>
+    <div class="hero-badge">
+      <span class="hero-badge-ico">🛡️</span>
+      <div class="hero-badge-text">Работаю официально</div>
+      <div class="hero-badge-sub">Договор и закрывающие документы</div>
+    </div>
+    <div class="hero-l-content">
+      <div class="hero-tag-line">Бухгалтер · Индустрия красоты · 10 лет</div>
+      <h1 class="hero-name">Надежда<br><em>Гижинская</em></h1>
+      <div class="hero-scroll">
+        <span class="hero-scroll-line"></span>
+        <span>листайте вниз</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <h2 class="hero-h1">Вы строите<br><strong>бизнес.</strong><br>Я строю<br><strong>его учёт.</strong></h2>
+    <p class="hero-desc">
+      Бухгалтерия для салонов красоты, ИП и ООО.
+      Налоги, отчётность, кадры — онлайн, без лишних слов.
+      Работаю по всей России.
+    </p>
+    <div class="hero-btns">
+      <a href="https://t.me/Nadezhda_Gizh" class="btn-main">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.64-.203-.653-.64.136-.954l11.57-4.461c.537-.194 1.006.131.828.943z"/></svg>
+        Написать в Telegram
+      </a>
+      <a href="#services" class="btn-sec">Посмотреть услуги →</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">10+</div>
+        <div class="hero-meta-label">лет опыта</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">50+</div>
+        <div class="hero-meta-label">клиентов</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">100%</div>
+        <div class="hero-meta-label">онлайн</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">УСН «Доходы»</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Патентная система</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Кадровое делопроизводство</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Салоны красоты</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Студии эпиляции</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Nail-студии</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Работа онлайн</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Оформление мастеров</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Восстановление учёта</span><span class="marquee-dot">·</span>
+    <!-- дублируем для бесшовности -->
+    <span class="marquee-item">УСН «Доходы»</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Патентная система</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Кадровое делопроизводство</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Салоны красоты</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Студии эпиляции</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Nail-студии</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Работа онлайн</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Оформление мастеров</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Восстановление учёта</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- BENTO: БОЛИ -->
+<section class="bento-section">
+  <div class="bento-label">Узнаёте себя?</div>
+  <h2 class="bento-title">Боли, которые я<br><em>беру на себя</em></h2>
+  <div class="bento-grid">
+    <div class="bento-card bc-1">
+      <span class="bc-icon">📋</span>
+      <div class="bc-title">«Не знаю, что и когда сдавать»</div>
+      <div class="bc-text">Дедлайны по декларациям и взносам постоянно путаются. Страх получить штраф за просрочку.</div>
+    </div>
+    <div class="bento-card bc-2">
+      <span class="bc-icon">👩‍💼</span>
+      <div class="bc-title">«Мастера — ИП или самозанятые?»</div>
+      <div class="bc-text">Непонятно, как правильно оформить мастеров, чтобы не нарваться на доначисления от налоговой.</div>
+    </div>
+    <div class="bento-card bc-3">
+      <span class="bc-icon">💸</span>
+      <div class="bc-title">«Плачу налоги и не понимаю за что»</div>
+      <div class="bc-text">Суммы берутся непонятно откуда. Хочется понять, где можно законно сэкономить.</div>
+    </div>
+    <div class="bento-card bc-4">
+      <span class="bc-icon">🏦</span>
+      <div class="bc-title">Банк запросил документы</div>
+      <div class="bc-text">Не знаешь что отвечать на запросы по 115-ФЗ.</div>
+    </div>
+    <div class="bento-card bc-5">
+      <span class="bc-icon">🕐</span>
+      <div class="bc-title">Нет времени на бумаги</div>
+      <div class="bc-text">Весь день в салоне, сил на документы уже нет.</div>
+    </div>
+    <div class="bento-card bc-6">
+      <div class="bc-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.3;margin-bottom:16px;">Все эти проблемы — моя работа, не ваша</div>
+      <div class="bc-text">Я беру учёт, отчётность и общение с налоговой на себя. Вы занимаетесь клиентами и ростом бизнеса.</div>
+    </div>
+    <div class="bento-card bc-photo">
+      <img src="img/papers.jpg" alt="Надежда Гижинская">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="about-img">
+    <img src="img/about.jpg" alt="Надежда Гижинская">
+    <div class="about-img-overlay"></div>
+  </div>
+  <div class="about-content">
+    <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--sand);">Обо мне</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--white);margin:16px 0 0;line-height:1.1;">Надежда<br>Гижинская</h2>
+    <blockquote class="about-quote">«Я не просто веду цифры — я помогаю бизнесу расти без страха перед налоговой»</blockquote>
+    <p class="about-text">Практикующий бухгалтер с опытом более 10 лет. Специализируюсь на индустрии красоты — знаю все нюансы: от оформления мастеров до кассовой дисциплины и патентной системы.</p>
+    <p class="about-text">Работаю онлайн — вам не нужно никуда ехать. Все документы и ответы — в мессенджере, быстро и по делу.</p>
+    <div class="about-tags">
+      <span class="about-tag">УСН · ПСН</span>
+      <span class="about-tag">Кадры</span>
+      <span class="about-tag">Оформление мастеров</span>
+      <span class="about-tag">Восстановление учёта</span>
+      <span class="about-tag">Онлайн по всей России</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding: 80px 0 0;">
+  <div class="services-section">
+    <div class="bento-label">Услуги и цены</div>
+    <h2 class="bento-title">Прозрачные цены —<br><em>никаких сюрпризов</em></h2>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-dot"></div>
+        <div class="svc-price">6 000 ₽</div>
+        <div class="svc-period">в месяц</div>
+        <div class="svc-name">ИП без сотрудников</div>
+        <div class="svc-desc">Ведение учёта, подготовка и сдача отчётности, расчёт налогов и взносов.</div>
+        <span class="svc-badge">УСН / ПСН</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-dot"></div>
+        <div class="svc-price">35 000 ₽</div>
+        <div class="svc-period">в месяц · до 10 сотрудников</div>
+        <div class="svc-name">Ведение под ключ</div>
+        <div class="svc-desc">Полное бухгалтерское и кадровое сопровождение ИП или ООО с сотрудниками.</div>
+        <span class="svc-badge">Всё включено</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-dot"></div>
+        <div class="svc-price">10 000 ₽</div>
+        <div class="svc-period">в час</div>
+        <div class="svc-name">Консультация</div>
+        <div class="svc-desc">Разбираем ваш вопрос: налоговый режим, оформление мастеров, оптимизация расходов.</div>
+        <span class="svc-badge">Онлайн</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-dot"></div>
+        <div class="svc-price">5 000 ₽</div>
+        <div class="svc-period">за декларацию</div>
+        <div class="svc-name">Декларация УСН</div>
+        <div class="svc-desc">Подготовка и подача годовой декларации по УСН. Быстро и без ошибок.</div>
+        <span class="svc-badge">Разовая услуга</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-dot"></div>
+        <div class="svc-price">500 ₽</div>
+        <div class="svc-period">за документ · до 10 позиций</div>
+        <div class="svc-name">Документы: ПП, УПД, Счёт, Акт</div>
+        <div class="svc-desc">Подготовка платёжных поручений, счетов, актов, УПД. Грамотно и быстро.</div>
+        <span class="svc-badge">Разовая услуга</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-dot"></div>
+        <div class="svc-price">5 000 ₽</div>
+        <div class="svc-period">за отчёт</div>
+        <div class="svc-name">Документы для Статистики</div>
+        <div class="svc-desc">Подготовка обязательной отчётности в органы Росстата.</div>
+        <span class="svc-badge">Разовая услуга</span>
+      </div>
+      <div class="svc-flex">
+        <div class="svc-flex-item">
+          <div class="svc-flex-label">Восстановление учёта</div>
+          <div class="svc-flex-val">По договорённости — зависит от объёма</div>
+        </div>
+        <div class="svc-flex-item">
+          <div class="svc-flex-label">Кадровое делопроизводство</div>
+          <div class="svc-flex-val">По договорённости — обсудим на консультации</div>
+        </div>
+        <div style="margin-left:auto;">
+          <a href="https://t.me/Nadezhda_Gizh" class="btn-main" style="white-space:nowrap;">Обсудить задачу →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews-section">
+  <div class="bento-label">Отзывы клиентов</div>
+  <h2 class="bento-title">Что говорят<br><em>те, кто работает со мной</em></h2>
+  <div class="rev-grid">
+    <div class="rev-card">
+      <span class="rev-mark">"</span>
+      <div class="rev-text">Надежда — просто свет в окошке в налоговом сумраке. Все чётко, по полочкам, человеческим и понятным языком! «Смотри сюда, делай вот так и будет тебе счастье!» — коротко, структурно и максимально оперативно!</div>
+      <div class="rev-sep"></div>
+      <div class="rev-name">Ольга Старостина</div>
+      <div class="rev-role">Постоянный клиент</div>
+    </div>
+    <div class="rev-card">
+      <span class="rev-mark">"</span>
+      <div class="rev-text">«Надежда дала Надежду», что можно выжить в этом налоговом водовороте и не пойти ко дну! Все по полочкам разложили и построили план, как работать в новой системе налогообложения. А главное — не нарушать закон!</div>
+      <div class="rev-sep"></div>
+      <div class="rev-name">Евгения Валерьевна</div>
+      <div class="rev-role">Владелец студии эпиляций</div>
+    </div>
+    <div class="rev-card">
+      <span class="rev-mark">"</span>
+      <div class="rev-text">Работаю с Надеждой более 5 лет. Её внимательность, знания и поддержка — это надёжное плечо. Ведём кадровое дело и бухгалтерию по 2 организациям. Благодарю за столь плодотворное сотрудничество.</div>
+      <div class="rev-sep"></div>
+      <div class="rev-name">Марина Ирлина</div>
+      <div class="rev-role">ИП, 2 организации · 5+ лет</div>
+    </div>
+    <div class="rev-card">
+      <span class="rev-mark">"</span>
+      <div class="rev-text">Надежда лучший специалист в своей области, которого я встречала. Не зря посоветовали коллеги. Кроме того — прекрасный человек. Спасибо за оперативность, образованность и инициативность в работе.</div>
+      <div class="rev-sep"></div>
+      <div class="rev-name">Екатерина Кузьмина</div>
+      <div class="rev-role">Клиент по рекомендации</div>
+    </div>
+    <div class="rev-card">
+      <span class="rev-mark">"</span>
+      <div class="rev-text">Спасибо за оперативную и ёмкую помощь. Много было индивидуальных нюансов — Надя дала рекомендации и объяснила, как в нашей ситуации лучше всего поступить. Всё чётко, понятно. Буду ещё обращаться обязательно.</div>
+      <div class="rev-sep"></div>
+      <div class="rev-name">Маргарита</div>
+      <div class="rev-role">Консультация</div>
+    </div>
+    <div class="rev-card">
+      <span class="rev-mark">"</span>
+      <div class="rev-text">Надежда действительно отличный эксперт и специалист своего дела! С удовольствием рекомендую всем партнёрам.</div>
+      <div class="rev-sep"></div>
+      <div class="rev-name">Юля Энерджи</div>
+      <div class="rev-role">Партнёр</div>
+    </div>
+  </div>
+  <div class="rev-more">
+    <a href="https://t.me/FeedbackNadinBuh">Читать все отзывы в Telegram →</a>
+  </div>
+</section>
+
+<!-- ФОРМА ЗАЯВКИ -->
+<section class="form-section" id="request">
+  <div class="form-inner">
+    <div class="bento-label">Оставить заявку</div>
+    <h2 class="bento-title" style="margin-bottom:16px;">Напишите —<br><em>разберёмся вместе</em></h2>
+    <p class="form-sub">Заполните форму и я свяжусь с вами в течение дня.</p>
+
+    <form class="lead-form" id="contactForm">
+      <input type="hidden" name="access_key" value="ВСТАВЬТЕ_КЛЮЧ_ИЗ_WEB3FORMS">
+      <input type="hidden" name="subject" value="Новая заявка с сайта — Надежда Гижинская">
+      <input type="checkbox" name="botcheck" style="display:none">
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Ваше имя *</label>
+          <input type="text" name="name" placeholder="Надежда" required>
+        </div>
+        <div class="form-field">
+          <label>Телефон *</label>
+          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Email *</label>
+        <input type="email" name="email" placeholder="example@mail.ru" required>
+      </div>
+      <div class="form-field">
+        <label>Вопрос или описание ситуации <span class="optional">(по желанию)</span></label>
+        <textarea name="message" placeholder="Расскажите что вас интересует, какой бизнес, какой вопрос..." rows="4"></textarea>
+      </div>
+      <button type="submit" class="form-btn">Отправить заявку →</button>
+      <p class="form-agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+    </form>
+
+    <div class="form-success" id="formSuccess" style="display:none;">
+      <strong>Заявка отправлена!</strong>
+      Я свяжусь с вами в течение дня. Если нужно быстрее — пишите сразу в Telegram: <a href="https://t.me/Nadezhda_Gizh" style="color:var(--sand);">@Nadezhda_Gizh</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="contacts-section">
+  <div class="contacts-l">
+    <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--sand);">Контакты</span>
+    <h2 class="contacts-title" style="margin-top:16px;">Давайте<br>поговорим</h2>
+    <p class="contacts-sub">Напишите удобным способом — отвечаю в течение дня.</p>
+    <a href="https://t.me/Nadezhda_Gizh" class="contact-row">
+      <div class="cr-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.64-.203-.653-.64.136-.954l11.57-4.461c.537-.194 1.006.131.828.943z"/></svg></div>
+      <div><div class="cr-label">Telegram</div><div class="cr-val">@Nadezhda_Gizh</div></div>
+    </a>
+    <a href="https://wa.me/79215935116" class="contact-row">
+      <div class="cr-icon">💬</div>
+      <div><div class="cr-label">WhatsApp</div><div class="cr-val">+7 (921) 593-51-16</div></div>
+    </a>
+    <a href="tel:+79215935116" class="contact-row">
+      <div class="cr-icon">📞</div>
+      <div><div class="cr-label">Телефон</div><div class="cr-val">+7 (921) 593-51-16</div></div>
+    </a>
+    <a href="mailto:gizhinskayanadysha@gmail.com" class="contact-row">
+      <div class="cr-icon">📧</div>
+      <div><div class="cr-label">Email</div><div class="cr-val">gizhinskayanadysha@gmail.com</div></div>
+    </a>
+  </div>
+  <div class="contacts-r">
+    <div class="bot-block">
+      <div class="bot-block-tag">Бесплатно</div>
+      <div class="bot-block-title">Гайды и шаблоны в Telegram-боте</div>
+      <div class="bot-block-text">Гайды по УСН, шаблоны документов, информация по налогам для ИП и ООО — всё бесплатно. Присоединяйтесь!</div>
+      <a href="https://t.me/NadinBuhAssistBot" class="btn-bot">🚀 Открыть бот</a>
+    </div>
+    <div style="margin-top:auto;padding-top:48px;border-top:1px solid rgba(255,255,255,0.15);">
+      <div style="font-size:13px;color:rgba(255,255,255,0.6);">Канал с материалами</div>
+      <a href="https://t.me/Nadinbuh" style="font-size:15px;font-weight:500;color:var(--white);text-decoration:none;display:block;margin-top:6px;">t.me/Nadinbuh →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="foot-logo" href="#">Надежда Гижинская · Бухгалтер</a>
+  <div class="foot-copy">© 2026 · ИП Гижинская Надежда Николаевна</div>
+  <div class="foot-links">
+    <a href="https://t.me/Nadinbuh">Канал</a>
+    <a href="https://t.me/FeedbackNadinBuh">Отзывы</a>
+    <a href="https://t.me/NadinBuhAssistBot">Бот</a>
+  </div>
+</footer>
+
+<!-- КНОПКА НАВЕРХ -->
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script>
+  // Кнопка «наверх»
+  const backBtn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backBtn.classList.toggle('visible', window.scrollY > 500);
+  });
+  backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Форма заявки → Web3Forms
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-btn');
+      btn.textContent = 'Отправляю...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Ошибка — попробуйте ещё раз';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Ошибка — попробуйте ещё раз';
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
