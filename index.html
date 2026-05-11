@@ -738,9 +738,8 @@
       .hero-r { padding: 40px 20px; }
       .hero-badge { display: none; }
       .bento-section, .services-section, .reviews-section { padding: 48px 16px; }
-      .bento-grid { grid-template-columns: 1fr 1fr; }
-      .bc-1, .bc-2, .bc-3, .bc-4, .bc-5, .bc-6, .bc-photo { grid-column: span 2; }
       /* ── Карусели ── */
+      .bento-grid,
       .svc-grid,
       .rev-grid,
       .how-steps {
@@ -755,6 +754,7 @@
         padding-left: 16px;
         padding-right: 16px;
       }
+      .bento-grid::-webkit-scrollbar,
       .svc-grid::-webkit-scrollbar,
       .rev-grid::-webkit-scrollbar,
       .how-steps::-webkit-scrollbar { display: none; }
@@ -764,6 +764,12 @@
         scroll-snap-align: start;
         min-width: 0;
       }
+      .bento-card {
+        flex: 0 0 82vw;
+        scroll-snap-align: start;
+        min-width: 0;
+      }
+      .bc-photo { min-height: 240px; }
       .svc-card { padding: 28px 20px; }
       .svc-flex {
         flex: 0 0 90vw;
@@ -809,8 +815,7 @@
       .hero-l { min-height: 72vw; }
       .hero-r { padding: 32px 16px; }
       .svc-price { font-size: 32px; }
-      .bento-grid { grid-template-columns: 1fr; }
-      .bc-1, .bc-2, .bc-3, .bc-4, .bc-5, .bc-6, .bc-photo { grid-column: span 1; }
+      .bento-card, .bc-photo { flex: 0 0 88vw; }
       .svc-card, .rev-card, .how-step { flex: 0 0 88vw; }
     }
   </style>
@@ -932,7 +937,7 @@
 <section class="bento-section">
   <div class="bento-label">Узнаёте себя?</div>
   <h2 class="bento-title">Боли, которые я<br><em>беру на себя</em></h2>
-  <div class="bento-grid">
+  <div class="bento-grid" id="bentoCarousel">
     <div class="bento-card bc-1">
       <span class="bc-icon">📋</span>
       <div class="bc-title">«Не знаю, что и когда сдавать»</div>
@@ -966,6 +971,7 @@
       <img src="img/papers.jpg" alt="Надежда Гижинская" loading="lazy">
     </div>
   </div>
+  <div class="carousel-dots" id="bentoDots"></div>
 </section>
 
 <!-- ABOUT -->
@@ -1294,17 +1300,19 @@
   /* ── Hamburger menu ── */
   const menuBtn   = document.getElementById('menuBtn');
   const navDrawer = document.getElementById('navDrawer');
-  menuBtn.addEventListener('click', () => {
-    const open = navDrawer.classList.toggle('open');
-    menuBtn.classList.toggle('open', open);
-    menuBtn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
-  });
-  navDrawer.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navDrawer.classList.remove('open');
-      menuBtn.classList.remove('open');
+  if (menuBtn && navDrawer) {
+    menuBtn.addEventListener('click', () => {
+      const open = navDrawer.classList.toggle('open');
+      menuBtn.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
     });
-  });
+    navDrawer.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navDrawer.classList.remove('open');
+        menuBtn.classList.remove('open');
+      });
+    });
+  }
 
   /* ── Back to top ── */
   const backTop = document.getElementById('backTop');
@@ -1373,6 +1381,7 @@
     window.addEventListener('resize', buildDots);
   }
 
+  initCarousel('bentoCarousel', 'bentoDots');
   initCarousel('svcCarousel', 'svcDots');
   initCarousel('revCarousel', 'revDots');
   initCarousel('howCarousel', 'howDots');
