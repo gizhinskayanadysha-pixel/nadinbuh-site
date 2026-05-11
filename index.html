@@ -7,7 +7,8 @@
   <meta name="description" content="Бухгалтерия для салонов красоты, ИП и ООО — чётко, понятно, по делу. 10 лет опыта. Онлайн по всей России.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="img/window.jpg">
+  <link rel="preload" as="image" href="img/window.webp" type="image/webp">
+  <link rel="preload" as="image" href="img/window.jpg" media="(not (type: image/webp))">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -62,6 +63,11 @@
       transition: background 0.2s;
     }
     .nav-links .nav-cta:hover { background: var(--burg-l); color: var(--white); }
+
+    /* ── Picture element reset ── */
+    picture { display: block; }
+    .hero-l picture, .about-img picture { position: absolute; inset: 0; }
+    .bc-photo picture { width: 100%; height: 100%; }
 
     /* ── HERO ── */
     .hero {
@@ -734,7 +740,7 @@
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .hero { grid-template-columns: 1fr; }
-      .hero-l { min-height: 0; aspect-ratio: 3/4; }
+      .hero-l { min-height: 100vw; }
       .hero-r { padding: 40px 20px; }
       .hero-badge { display: none; }
       .bento-section, .services-section, .reviews-section { padding: 48px 16px; }
@@ -802,7 +808,7 @@
       }
 
       .about-section { grid-template-columns: 1fr; }
-      .about-img { min-height: 0; aspect-ratio: 3/4; }
+      .about-img { min-height: 80vw; }
       .about-content { padding: 40px 20px; }
       .contacts-section { grid-template-columns: 1fr; }
       .contacts-l, .contacts-r { padding: 48px 20px; }
@@ -812,7 +818,7 @@
       .back-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
     }
     @media (max-width: 480px) {
-      .hero-l { aspect-ratio: 4/5; }
+      .hero-l { min-height: 110vw; }
       .hero-r { padding: 32px 16px; }
       .svc-price { font-size: 32px; }
       .bento-card, .bc-photo { flex: 0 0 88vw; }
