@@ -7,8 +7,9 @@
   <meta name="description" content="Бухгалтерия для салонов красоты, ИП и ООО — чётко, понятно, по делу. 10 лет опыта. Онлайн по всей России.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="img/window.webp" type="image/webp">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/window.jpg">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"></noscript>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -35,7 +36,7 @@
     }
 
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--linen); color: var(--espresso); line-height: 1.6; overflow-x: hidden; }
+    body { font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif; background: var(--linen); color: var(--espresso); line-height: 1.6; overflow-x: hidden; }
 
     /* ── NAV ── */
     nav {
@@ -47,7 +48,7 @@
       border-bottom: 1px solid rgba(40,24,12,0.10);
     }
     .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-size: 20px; font-weight: 600;
       color: var(--espresso); text-decoration: none;
       letter-spacing: 0.5px;
