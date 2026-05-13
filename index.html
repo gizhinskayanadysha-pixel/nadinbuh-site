@@ -228,9 +228,7 @@
     .bc-3 { grid-column: span 4; }
     .bc-4 { grid-column: span 3; }
     .bc-5 { grid-column: span 3; }
-    .bc-6 { grid-column: span 6; background: var(--burg); border-color: transparent; }
-    .bc-6 .bc-title { color: var(--white); font-size: 18px; }
-    .bc-6 .bc-text { color: rgba(255,255,255,0.7); }
+    .bc-6 { grid-column: span 6; }
 
     /* ── SERVICES ── */
     .services-section { padding: 0 48px 80px; max-width: 1320px; margin: 0 auto; }
@@ -276,7 +274,7 @@
       width: 8px; height: 8px;
       background: var(--burg); border-radius: 50%;
     }
-    .svc-flex { grid-column: span 3; background: var(--dark3); padding: 32px 36px; display: flex; gap: 48px; flex-wrap: wrap; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+    .svc-flex { grid-column: span 3; background: var(--dark2); padding: 32px 36px; display: flex; gap: 48px; flex-wrap: wrap; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
     .svc-flex-item { }
     .svc-flex-label { font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
     .svc-flex-val { font-size: 15px; font-weight: 500; color: var(--cream); }
@@ -423,10 +421,7 @@
     .bc-title { color: var(--white); }
     .bc-text  { color: rgba(255,255,255,0.5); }
 
-    /* CTA-карточка — бургундская */
-    .bc-6 { background: var(--burg) !important; border-color: transparent !important; }
-    .bc-6 .bc-title { color: #fff !important; font-family: 'Cormorant Garamond', serif; font-size: 24px !important; font-weight: 600 !important; }
-    .bc-6 .bc-text  { color: rgba(255,255,255,0.78) !important; }
+    .bc-6 { border-color: rgba(125,23,19,0.28); }
 
     /* Services — тёмные карточки */
     .svc-grid { background: rgba(40,24,12,0.12); }
@@ -436,7 +431,7 @@
     .svc-period { color: var(--text-m); }
     .svc-name   { color: var(--white); }
     .svc-desc   { color: rgba(255,255,255,0.42); }
-    .svc-flex   { background: var(--dark); border-top-color: rgba(255,255,255,0.06); }
+    .svc-flex   { background: var(--dark2); border-top-color: rgba(255,255,255,0.06); }
     .svc-flex-label { color: rgba(255,255,255,0.3); }
     .svc-flex-val   { color: var(--cream); }
 
@@ -556,6 +551,10 @@
       font-size: 16px; color: var(--cream);
     }
     .form-success strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 12px; }
+    .field-error { font-size: 11px; color: #e07070; min-height: 14px; margin-top: 2px; }
+    .form-field input.invalid { border-color: #e07070; }
+    .form-global-error { font-size: 13px; color: #e07070; margin-top: 8px; display: none; line-height: 1.5; }
+    .form-global-error a { color: var(--sand); }
 
     /* ── КАК РАБОТАЕМ ── */
     .how-section {
@@ -795,8 +794,11 @@
         border-radius: 3px;
       }
 
+      .hero-h1 { text-align: center; }
       .about-section { padding: 48px 20px; }
       .about-content { padding: 0; }
+      .about-tags { gap: 8px; }
+      .about-tag { flex: 0 0 calc(50% - 4px); text-align: center; }
       .contacts-section { grid-template-columns: 1fr; }
       .contacts-l, .contacts-r { padding: 48px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
@@ -1189,22 +1191,26 @@
       <div class="form-row">
         <div class="form-field">
           <label>Ваше имя *</label>
-          <input type="text" name="name" placeholder="Надежда" required>
+          <input type="text" name="name" id="nameInput" placeholder="Надежда" autocomplete="name" required>
+          <div class="field-error" id="nameError"></div>
         </div>
         <div class="form-field">
           <label>Телефон *</label>
-          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+          <input type="tel" name="phone" id="phoneInput" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" required>
+          <div class="field-error" id="phoneError"></div>
         </div>
       </div>
       <div class="form-field">
         <label>Email *</label>
-        <input type="email" name="email" placeholder="example@mail.ru" required>
+        <input type="email" name="email" id="emailInput" placeholder="example@mail.ru" autocomplete="email" required>
+        <div class="field-error" id="emailError"></div>
       </div>
       <div class="form-field">
         <label>Вопрос или описание ситуации <span class="optional">(по желанию)</span></label>
         <textarea name="message" placeholder="Расскажите что вас интересует, какой бизнес, какой вопрос..." rows="4"></textarea>
       </div>
-      <button type="submit" class="form-btn">Отправить заявку →</button>
+      <button type="submit" class="form-btn" id="formBtn">Отправить заявку →</button>
+      <div class="form-global-error" id="formGlobalError"></div>
       <label class="form-consent">
         <input type="checkbox" name="consent" required>
         <span class="form-consent-text">
@@ -1371,15 +1377,72 @@
   initCarousel('revCarousel', 'revDots');
   initCarousel('howCarousel', 'howDots');
 
+  /* ── Phone formatter ── */
+  const phoneInput = document.getElementById('phoneInput');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function () {
+      let digits = this.value.replace(/\D/g, '');
+      if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+      if (!digits.startsWith('7') && digits.length > 0) digits = '7' + digits;
+      digits = digits.slice(0, 11);
+      if (digits.length === 0) { this.value = ''; return; }
+      let r = '+7';
+      if (digits.length > 1) r += ' (' + digits.slice(1, 4);
+      if (digits.length >= 4) r += ') ' + digits.slice(4, 7);
+      if (digits.length >= 7) r += '-' + digits.slice(7, 9);
+      if (digits.length >= 9) r += '-' + digits.slice(9, 11);
+      this.value = r;
+    });
+  }
+
   /* ── Contact form (Web3Forms) ── */
   const form    = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
   if (form) {
+    function validateName(v) { return v.trim().length >= 2 && /^[а-яёА-ЯЁa-zA-Z][а-яёА-ЯЁa-zA-Z\s\-]*$/.test(v.trim()); }
+    function validatePhone(v) { const d = v.replace(/\D/g, ''); return d.length === 11 && (d[0] === '7' || d[0] === '8'); }
+    function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
+
+    function setError(inputId, errorId, msg) {
+      const el = document.getElementById(inputId);
+      const er = document.getElementById(errorId);
+      if (!el || !er) return;
+      if (msg) { el.classList.add('invalid'); er.textContent = msg; }
+      else      { el.classList.remove('invalid'); er.textContent = ''; }
+    }
+
+    ['nameInput','phoneInput','emailInput'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', () => el.classList.remove('invalid'));
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = form.querySelector('.form-btn');
+      const nameVal  = document.getElementById('nameInput').value;
+      const phoneVal = document.getElementById('phoneInput').value;
+      const emailVal = document.getElementById('emailInput').value;
+      let ok = true;
+
+      if (!validateName(nameVal)) {
+        setError('nameInput','nameError','Введите имя (минимум 2 буквы)'); ok = false;
+      } else setError('nameInput','nameError','');
+
+      if (!validatePhone(phoneVal)) {
+        setError('phoneInput','phoneError','Введите корректный номер: +7 (XXX) XXX-XX-XX'); ok = false;
+      } else setError('phoneInput','phoneError','');
+
+      if (!validateEmail(emailVal)) {
+        setError('emailInput','emailError','Введите корректный email'); ok = false;
+      } else setError('emailInput','emailError','');
+
+      if (!ok) return;
+
+      const btn = document.getElementById('formBtn');
+      const globalErr = document.getElementById('formGlobalError');
       btn.disabled = true;
       btn.textContent = 'Отправляем…';
+      globalErr.style.display = 'none';
+
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -1391,7 +1454,9 @@
         } else { throw new Error(); }
       } catch {
         btn.disabled = false;
-        btn.textContent = 'Ошибка — попробуйте ещё раз';
+        btn.textContent = 'Отправить заявку →';
+        globalErr.innerHTML = 'Не удалось отправить форму. Напишите напрямую: <a href="https://t.me/Nadezhda_Gizh" target="_blank">Telegram @Nadezhda_Gizh</a>';
+        globalErr.style.display = 'block';
       }
     });
   }
