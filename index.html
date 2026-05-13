@@ -77,18 +77,19 @@
       min-height: calc(100vh - 72px);
       background: var(--dark2);
     }
+    picture { display: contents; }
     .hero-l img {
-      position: absolute; inset: 0;
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: cover; object-position: center top;
       filter: brightness(0.55) saturate(0.9);
     }
     .hero-l-overlay {
-      position: absolute; inset: 0;
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
       background: linear-gradient(135deg, rgba(74,12,9,0.65) 0%, rgba(30,20,18,0.30) 60%, transparent 100%);
     }
     .hero-l-content {
-      position: absolute; inset: 0;
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: 56px 52px;
     }
@@ -286,7 +287,7 @@
     }
     .about-img { position: relative; overflow: hidden; }
     .about-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(0.75) brightness(0.85); }
-    .about-img-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--dark) 100%); }
+    .about-img-overlay { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(90deg, transparent 60%, var(--dark) 100%); }
     .about-content {
       background: var(--dark); padding: 80px 64px;
       display: flex; flex-direction: column; justify-content: center;
@@ -861,7 +862,10 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-l">
-    <img src="img/window.webp" alt="Надежда Гижинская" loading="eager" decoding="async" fetchpriority="high">
+    <picture>
+      <source srcset="img/window.webp" type="image/webp">
+      <img src="img/window.jpg" alt="Надежда Гижинская" loading="eager" decoding="async" fetchpriority="high">
+    </picture>
     <div class="hero-l-overlay"></div>
     <div class="hero-badge">
       <span class="hero-badge-ico">🛡️</span>
@@ -968,7 +972,10 @@
       <div class="bc-text">Я беру учёт, отчётность и общение с налоговой на себя. Вы занимаетесь клиентами и ростом бизнеса.</div>
     </div>
     <div class="bento-card bc-photo">
-      <img src="img/papers.webp" alt="Надежда Гижинская" loading="lazy">
+      <picture>
+        <source srcset="img/papers.webp" type="image/webp">
+        <img src="img/papers.jpg" alt="Надежда Гижинская" loading="lazy">
+      </picture>
     </div>
   </div>
   <div class="carousel-dots" id="bentoDots"></div>
@@ -977,7 +984,10 @@
 <!-- ABOUT -->
 <section id="about" class="about-section">
   <div class="about-img">
-    <img src="img/about.webp" alt="Надежда Гижинская" loading="lazy">
+    <picture>
+      <source srcset="img/about.webp" type="image/webp">
+      <img src="img/about.jpg" alt="Надежда Гижинская" loading="lazy">
+    </picture>
     <div class="about-img-overlay"></div>
   </div>
   <div class="about-content">
