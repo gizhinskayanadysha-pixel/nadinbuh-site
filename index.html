@@ -736,6 +736,15 @@
       .nav-hamburger { display: flex; }
       .hero { grid-template-columns: 1fr; }
       .hero-l { min-height: 100vw; }
+      .hero-l picture { display: none; }
+      .hero-l::before {
+        content: '';
+        position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+        background-image: url('img/window.jpg');
+        background-size: cover;
+        background-position: center top;
+        filter: brightness(0.55) saturate(0.9);
+      }
       .hero-r { padding: 40px 20px; }
       .hero-badge { display: none; }
       .bento-section, .services-section, .reviews-section { padding: 48px 16px; }
