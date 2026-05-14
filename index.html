@@ -308,13 +308,13 @@
     .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
     .rev-card {
       background: var(--dark2); border: 1px solid rgba(255,255,255,0.06);
-      padding: 36px 30px;
+      padding: 22px 24px;
       position: relative;
     }
     .rev-mark {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 72px; color: var(--burg); opacity: 0.4;
-      line-height: 0.8; margin-bottom: 16px; display: block;
+      font-size: 56px; color: var(--burg); opacity: 0.4;
+      line-height: 0.8; margin-bottom: 10px; display: block;
     }
     .rev-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 24px; font-style: italic; }
     .rev-sep { width: 24px; height: 1px; background: var(--burg); margin-bottom: 16px; }
@@ -799,6 +799,7 @@
       .about-content { padding: 0; }
       .about-tags { gap: 8px; }
       .about-tag { flex: 0 0 calc(50% - 4px); text-align: center; }
+      .about-tag:last-child { flex: 0 0 100%; }
       .contacts-section { grid-template-columns: 1fr; }
       .contacts-l, .contacts-r { padding: 48px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
@@ -873,7 +874,7 @@
     </div>
   </div>
   <div class="hero-r">
-    <h2 class="hero-h1">Вы строите<br><strong>бизнес.</strong><br>Я строю<br><strong>его учёт.</strong></h2>
+    <h2 class="hero-h1">Вы строите <strong>бизнес.</strong><br>Я строю <strong>его учёт.</strong></h2>
     <p class="hero-desc">
       Бухгалтерия для салонов красоты, ИП и ООО.
       Налоги, отчётность, кадры — онлайн, без лишних слов.
@@ -1324,11 +1325,12 @@
 
   /* ── Cookie banner ── */
   const banner = document.getElementById('cookieBanner');
-  if (!localStorage.getItem('cookie_ok')) {
-    setTimeout(() => banner.classList.add('visible'), 1200);
+  if (banner && !localStorage.getItem('cookie_ok')) {
+    setTimeout(function() { banner.classList.add('visible'); }, 1200);
   }
-  document.getElementById('cookieAccept').addEventListener('click', () => {
-    banner.classList.remove('visible');
+  var cookieBtn = document.getElementById('cookieAccept');
+  if (cookieBtn) cookieBtn.addEventListener('click', function() {
+    if (banner) banner.classList.remove('visible');
     localStorage.setItem('cookie_ok', '1');
   });
 
@@ -1452,7 +1454,7 @@
           form.style.display = 'none';
           success.style.display = 'block';
         } else { throw new Error(); }
-      } catch {
+      } catch(e) {
         btn.disabled = false;
         btn.textContent = 'Отправить заявку →';
         globalErr.innerHTML = 'Не удалось отправить форму. Напишите напрямую: <a href="https://t.me/Nadezhda_Gizh" target="_blank">Telegram @Nadezhda_Gizh</a>';
