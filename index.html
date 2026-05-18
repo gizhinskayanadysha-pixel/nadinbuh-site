@@ -1288,16 +1288,16 @@
 
 <script>
   /* ── Hamburger menu ── */
-  const menuBtn   = document.getElementById('menuBtn');
-  const navDrawer = document.getElementById('navDrawer');
+  var menuBtn   = document.getElementById('menuBtn');
+  var navDrawer = document.getElementById('navDrawer');
   if (menuBtn && navDrawer) {
-    menuBtn.addEventListener('click', () => {
-      const open = navDrawer.classList.toggle('open');
+    menuBtn.addEventListener('click', function() {
+      var open = navDrawer.classList.toggle('open');
       menuBtn.classList.toggle('open', open);
       menuBtn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
     });
-    navDrawer.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
+    navDrawer.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
         navDrawer.classList.remove('open');
         menuBtn.classList.remove('open');
       });
@@ -1305,26 +1305,28 @@
   }
 
   /* ── Back to top ── */
-  const backTop = document.getElementById('backTop');
+  var backTop = document.getElementById('backTop');
   if (backTop) {
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
       backTop.classList.toggle('visible', window.scrollY > 400);
     });
-    backTop.addEventListener('click', () => { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { window.scrollTo(0, 0); } });
+    backTop.addEventListener('click', function() {
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { window.scrollTo(0, 0); }
+    });
   }
 
   /* ── FAQ ── */
-  document.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
       if (!wasOpen) item.classList.add('open');
     });
   });
 
   /* ── Cookie banner ── */
-  const banner = document.getElementById('cookieBanner');
+  var banner = document.getElementById('cookieBanner');
   if (banner && !localStorage.getItem('cookie_ok')) {
     setTimeout(function() { banner.classList.add('visible'); }, 1200);
   }
@@ -1336,8 +1338,8 @@
 
   /* ── Carousel dots ── */
   function initCarousel(trackId, dotsId) {
-    const track = document.getElementById(trackId);
-    const dotsEl = document.getElementById(dotsId);
+    var track = document.getElementById(trackId);
+    var dotsEl = document.getElementById(dotsId);
     if (!track || !dotsEl) return;
 
     function isMobile() { return window.innerWidth <= 960; }
@@ -1345,28 +1347,30 @@
     function buildDots() {
       dotsEl.innerHTML = '';
       if (!isMobile()) return;
-      const items = Array.from(track.children);
-      items.forEach((_, i) => {
-        const btn = document.createElement('button');
+      var items = Array.from(track.children);
+      items.forEach(function(item, i) {
+        var btn = document.createElement('button');
         btn.className = 'carousel-dot' + (i === 0 ? ' active' : '');
         btn.setAttribute('aria-label', 'Слайд ' + (i + 1));
-        btn.addEventListener('click', () => {
-          items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-        });
+        (function(idx) {
+          btn.addEventListener('click', function() {
+            items[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+          });
+        })(i);
         dotsEl.appendChild(btn);
       });
     }
 
     function updateDots() {
       if (!isMobile()) return;
-      const dots = dotsEl.querySelectorAll('.carousel-dot');
-      const items = Array.from(track.children);
-      let closest = 0, minDist = Infinity;
-      items.forEach((el, i) => {
-        const dist = Math.abs(el.getBoundingClientRect().left - track.getBoundingClientRect().left);
+      var dots = dotsEl.querySelectorAll('.carousel-dot');
+      var items = Array.from(track.children);
+      var closest = 0, minDist = Infinity;
+      items.forEach(function(el, i) {
+        var dist = Math.abs(el.getBoundingClientRect().left - track.getBoundingClientRect().left);
         if (dist < minDist) { minDist = dist; closest = i; }
       });
-      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === closest); });
     }
 
     buildDots();
@@ -1380,15 +1384,15 @@
   initCarousel('howCarousel', 'howDots');
 
   /* ── Phone formatter ── */
-  const phoneInput = document.getElementById('phoneInput');
+  var phoneInput = document.getElementById('phoneInput');
   if (phoneInput) {
-    phoneInput.addEventListener('input', function () {
-      let digits = this.value.replace(/\D/g, '');
-      if (digits.startsWith('8')) digits = '7' + digits.slice(1);
-      if (!digits.startsWith('7') && digits.length > 0) digits = '7' + digits;
+    phoneInput.addEventListener('input', function() {
+      var digits = this.value.replace(/\D/g, '');
+      if (digits.indexOf('8') === 0) digits = '7' + digits.slice(1);
+      if (digits.indexOf('7') !== 0 && digits.length > 0) digits = '7' + digits;
       digits = digits.slice(0, 11);
       if (digits.length === 0) { this.value = ''; return; }
-      let r = '+7';
+      var r = '+7';
       if (digits.length > 1) r += ' (' + digits.slice(1, 4);
       if (digits.length >= 4) r += ') ' + digits.slice(4, 7);
       if (digits.length >= 7) r += '-' + digits.slice(7, 9);
@@ -1398,68 +1402,78 @@
   }
 
   /* ── Contact form (Web3Forms) ── */
-  const form    = document.getElementById('contactForm');
-  const success = document.getElementById('formSuccess');
+  var form    = document.getElementById('contactForm');
+  var success = document.getElementById('formSuccess');
+
+  function validateName(v) { return v.trim().length >= 2 && /^[а-яёА-ЯЁa-zA-Z][а-яёА-ЯЁa-zA-Z\s\-]*$/.test(v.trim()); }
+  function validatePhone(v) { var d = v.replace(/\D/g, ''); return d.length === 11 && (d[0] === '7' || d[0] === '8'); }
+  function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
+
+  function setFieldError(inputId, errorId, msg) {
+    var el = document.getElementById(inputId);
+    var er = document.getElementById(errorId);
+    if (!el || !er) return;
+    if (msg) { el.classList.add('invalid'); er.textContent = msg; }
+    else      { el.classList.remove('invalid'); er.textContent = ''; }
+  }
+
   if (form) {
-    function validateName(v) { return v.trim().length >= 2 && /^[а-яёА-ЯЁa-zA-Z][а-яёА-ЯЁa-zA-Z\s\-]*$/.test(v.trim()); }
-    function validatePhone(v) { const d = v.replace(/\D/g, ''); return d.length === 11 && (d[0] === '7' || d[0] === '8'); }
-    function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
-
-    function setError(inputId, errorId, msg) {
-      const el = document.getElementById(inputId);
-      const er = document.getElementById(errorId);
-      if (!el || !er) return;
-      if (msg) { el.classList.add('invalid'); er.textContent = msg; }
-      else      { el.classList.remove('invalid'); er.textContent = ''; }
-    }
-
-    ['nameInput','phoneInput','emailInput'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('input', () => el.classList.remove('invalid'));
+    ['nameInput','phoneInput','emailInput'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', function() { el.classList.remove('invalid'); });
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const nameVal  = document.getElementById('nameInput').value;
-      const phoneVal = document.getElementById('phoneInput').value;
-      const emailVal = document.getElementById('emailInput').value;
-      let ok = true;
+      var nameVal  = document.getElementById('nameInput').value;
+      var phoneVal = document.getElementById('phoneInput').value;
+      var emailVal = document.getElementById('emailInput').value;
+      var ok = true;
 
       if (!validateName(nameVal)) {
-        setError('nameInput','nameError','Введите имя (минимум 2 буквы)'); ok = false;
-      } else setError('nameInput','nameError','');
+        setFieldError('nameInput','nameError','Введите имя (минимум 2 буквы)'); ok = false;
+      } else setFieldError('nameInput','nameError','');
 
       if (!validatePhone(phoneVal)) {
-        setError('phoneInput','phoneError','Введите корректный номер: +7 (XXX) XXX-XX-XX'); ok = false;
-      } else setError('phoneInput','phoneError','');
+        setFieldError('phoneInput','phoneError','Введите корректный номер: +7 (XXX) XXX-XX-XX'); ok = false;
+      } else setFieldError('phoneInput','phoneError','');
 
       if (!validateEmail(emailVal)) {
-        setError('emailInput','emailError','Введите корректный email'); ok = false;
-      } else setError('emailInput','emailError','');
+        setFieldError('emailInput','emailError','Введите корректный email'); ok = false;
+      } else setFieldError('emailInput','emailError','');
 
       if (!ok) return;
 
-      const btn = document.getElementById('formBtn');
-      const globalErr = document.getElementById('formGlobalError');
+      var btn = document.getElementById('formBtn');
+      var globalErr = document.getElementById('formGlobalError');
       btn.disabled = true;
       btn.textContent = 'Отправляем…';
-      globalErr.style.display = 'none';
+      if (globalErr) globalErr.style.display = 'none';
 
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: new FormData(form)
-        });
-        if (res.ok) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://api.web3forms.com/submit');
+      xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
           form.style.display = 'none';
-          success.style.display = 'block';
-        } else { throw new Error(); }
-      } catch(e) {
+          if (success) success.style.display = 'block';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Отправить заявку →';
+          if (globalErr) {
+            globalErr.innerHTML = 'Не удалось отправить. Напишите: <a href="https://t.me/Nadezhda_Gizh" target="_blank">Telegram @Nadezhda_Gizh</a>';
+            globalErr.style.display = 'block';
+          }
+        }
+      };
+      xhr.onerror = function() {
         btn.disabled = false;
         btn.textContent = 'Отправить заявку →';
-        globalErr.innerHTML = 'Не удалось отправить форму. Напишите напрямую: <a href="https://t.me/Nadezhda_Gizh" target="_blank">Telegram @Nadezhda_Gizh</a>';
-        globalErr.style.display = 'block';
-      }
+        if (globalErr) {
+          globalErr.innerHTML = 'Не удалось отправить. Напишите: <a href="https://t.me/Nadezhda_Gizh" target="_blank">Telegram @Nadezhda_Gizh</a>';
+          globalErr.style.display = 'block';
+        }
+      };
+      xhr.send(new FormData(form));
     });
   }
 </script>
