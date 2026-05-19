@@ -75,6 +75,9 @@
       overflow: hidden;
       min-height: calc(100vh - 72px);
       background: linear-gradient(150deg, #1E1412 0%, #2C1D1A 45%, #4A0C09 100%);
+      background-image: url('img/window.jpg');
+      background-size: cover;
+      background-position: center top;
     }
     .hero-l-deco {
       position: absolute;
@@ -282,10 +285,23 @@
     /* ── ABOUT ── */
     .about-section {
       background: var(--dark2);
-      padding: 80px 48px;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .about-photo-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+    }
+    .about-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
     }
     .about-content {
       max-width: 760px; margin: 0 auto;
+      padding: 80px 48px;
       display: flex; flex-direction: column;
     }
     .about-quote {
@@ -815,6 +831,39 @@
       .bento-card { flex: 0 0 88vw; }
       .svc-card, .rev-card, .how-step { flex: 0 0 88vw; }
     }
+
+    /* ── ABOUT — mobile ── */
+    @media (max-width: 960px) {
+      .about-section { grid-template-columns: 1fr; }
+      .about-photo-wrap { min-height: 280px; }
+      .about-content { padding: 40px 20px; }
+    }
+
+    /* ── ПЛАВАЮЩАЯ КНОПКА ── */
+    .float-call {
+      position: fixed; bottom: 88px; right: 32px; z-index: 299;
+      display: flex; align-items: center; gap: 10px;
+      background: var(--burg); color: var(--white);
+      padding: 8px 16px 8px 8px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.4s, transform 0.4s, background 0.2s;
+      white-space: nowrap;
+    }
+    .float-call.visible { opacity: 1; transform: translateY(0); }
+    .float-call:hover { background: var(--burg-l); }
+    .float-call-photo {
+      width: 38px; height: 38px; border-radius: 50%;
+      object-fit: cover; object-position: center top;
+      border: 2px solid rgba(255,255,255,0.35);
+      flex-shrink: 0;
+    }
+    .float-call-label { font-size: 13px; font-weight: 600; letter-spacing: 0.3px; }
+    @media (max-width: 960px) {
+      .float-call { bottom: 72px; right: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -839,7 +888,7 @@
     <a href="#faq">FAQ</a>
     <a href="#reviews">Отзывы</a>
     <a href="#request">Заявка</a>
-    <a href="#contacts" class="nav-cta">Написать</a>
+    <a href="#contacts" class="nav-cta">Связаться</a>
   </div>
   <button class="nav-hamburger" id="menuBtn" aria-label="Открыть меню">
     <span></span><span></span><span></span>
@@ -971,6 +1020,9 @@
 
 <!-- ABOUT -->
 <section id="about" class="about-section">
+  <div class="about-photo-wrap">
+    <img src="img/about.jpg" alt="Надежда Гижинская — бухгалтер" loading="lazy">
+  </div>
   <div class="about-content">
     <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--sand);">Обо мне</span>
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--white);margin:16px 0 0;line-height:1.1;">Надежда<br>Гижинская</h2>
@@ -1284,6 +1336,12 @@
   </div>
 </footer>
 
+<!-- ПЛАВАЮЩАЯ КНОПКА СВЯЗИ -->
+<a href="tel:+79215935116" class="float-call" id="floatCall" aria-label="Позвонить Надежде">
+  <img src="img/about.jpg" class="float-call-photo" alt="Надежда">
+  <span class="float-call-label">📞 Связаться</span>
+</a>
+
 <!-- КНОПКА НАВЕРХ -->
 <button class="back-top" id="backTop" aria-label="Наверх">↑</button>
 
@@ -1325,6 +1383,12 @@
       if (!wasOpen) item.classList.add('open');
     });
   });
+
+  /* ── Плавающая кнопка ── */
+  setTimeout(function() {
+    var floatCall = document.getElementById('floatCall');
+    if (floatCall) floatCall.classList.add('visible');
+  }, 5000);
 
   /* ── Cookie banner ── */
   var banner = document.getElementById('cookieBanner');
